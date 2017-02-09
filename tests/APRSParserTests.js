@@ -6,6 +6,7 @@ var expect = chai.expect;
 var Message = require("../lib/Message/Message.js");
 var Position = require("../lib/Position/Position.js");
 var Telemetry = require("../lib/Telemetry/Telemetry.js");
+var TelemetryDescription = require("../lib/Telemetry/TelemetryDescription.js");
 
 var APRSMessage = require("../lib/APRSMessage.js");
 
@@ -48,6 +49,14 @@ describe('APRSParser', function () {
         expect(obj).to.exist;
         expect(obj.data).to.exist;
         expect(obj.data).to.be.an.instanceOf(Telemetry);
+    });
+
+    it('Telemetry description recognition', function () {
+        var obj = parser.parse("SQ7PFS>APRS::N0QBF-11 :PARM.Battery,Btemp,ATemp,Pres,Alt,Camra");
+
+        expect(obj).to.exist;
+        expect(obj.data).to.exist;
+        expect(obj.data).to.be.an.instanceOf(TelemetryDescription);
     });
 
     it('Unknown format recognition', function () {

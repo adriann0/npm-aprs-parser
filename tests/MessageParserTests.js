@@ -17,6 +17,7 @@ describe('Messages', function () {
         expect(result.text).to.equal("Testing");
         expect(result.addressee.call).to.equal("WU2Z");
         expect(result.type).to.equal("msg");
+        expect(result.id).to.not.exist;
     });
 
     it('Parsing addressee, content and id', function () {
