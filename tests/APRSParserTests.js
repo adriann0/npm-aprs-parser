@@ -24,7 +24,7 @@ describe('APRSParser', function () {
         expect(obj).to.exist;
         expect(obj.from).to.eql(new Callsign("SQ7PFS-15"));
         expect(obj.to).to.eql(new Callsign("APRS"));
-        expect(obj.digi).to.eql([new Callsign("TCPIP")]);
+        expect(obj.via).to.eql([new Callsign("TCPIP")]);
     });
 
     it('Not compressed position recognition', function () {
