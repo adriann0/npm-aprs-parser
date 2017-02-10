@@ -5,10 +5,10 @@ var expect = chai.expect;
 
 var TelemetryDescriptionParser = require("../lib/Telemetry/TelemetryDescriptionParser");
 
-var TelemetryNames = require("../lib/Telemetry/TelemetryNames.js");
-var TelemetryLabels = require("../lib/Telemetry/TelemetryLabels.js");
-var TelemetryEquations = require("../lib/Telemetry/TelemetryEquations.js");
-var TelemetryBitSense = require("../lib/Telemetry/TelemetryBitSense.js");
+var TelemetryNames = require("../lib/MessageModels/TelemetryNames.js");
+var TelemetryLabels = require("../lib/MessageModels/TelemetryLabels.js");
+var TelemetryEquations = require("../lib/MessageModels/TelemetryEquations.js");
+var TelemetryBitSense = require("../lib/MessageModels/TelemetryBitSense.js");
 
 describe('Telemetry description', function () {
     it('Names (not all fields described)', function () {

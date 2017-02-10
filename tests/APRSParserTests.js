@@ -3,10 +3,10 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var Message = require("../lib/Message/Message.js");
-var Position = require("../lib/Position/Position.js");
-var Telemetry = require("../lib/Telemetry/Telemetry.js");
-var TelemetryNames = require("../lib/Telemetry/TelemetryNames.js");
+var Message = require("../lib/MessageModels/Message.js");
+var Position = require("../lib/MessageModels/Position.js");
+var Telemetry = require("../lib/MessageModels/Telemetry.js");
+var TelemetryNames = require("../lib/MessageModels/TelemetryNames.js");
 
 var APRSMessage = require("../lib/APRSMessage.js");
 
@@ -15,7 +15,7 @@ var Callsign = require("../lib/Callsign.js");
 var APRSParser = require("../lib/index.js");
 
 describe('APRSParser', function () {
-    var parser = new APRSParser();
+    var parser = new APRSParser.APRSParser();
 
     it('Header parsing', function () {
         var obj = parser.parse("SQ7PFS-15>APRS,TCPIP:");

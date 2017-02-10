@@ -4,7 +4,7 @@ var chai = require('chai');
 var expect = chai.expect;
 
 var MessageParser = require("../lib/Message/MessageParser");
-var Message = require("../lib/Message/Message.js");
+var Message = require("../lib/MessageModels/Message.js");
 
 describe('Messages', function () {
     it('Parsing addressee and content', function () {
