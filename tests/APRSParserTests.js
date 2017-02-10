@@ -6,7 +6,7 @@ var expect = chai.expect;
 var Message = require("../lib/Message/Message.js");
 var Position = require("../lib/Position/Position.js");
 var Telemetry = require("../lib/Telemetry/Telemetry.js");
-var TelemetryDescription = require("../lib/Telemetry/TelemetryDescription.js");
+var TelemetryNames = require("../lib/Telemetry/TelemetryNames.js");
 
 var APRSMessage = require("../lib/APRSMessage.js");
 
@@ -56,7 +56,7 @@ describe('APRSParser', function () {
 
         expect(obj).to.exist;
         expect(obj.data).to.exist;
-        expect(obj.data).to.be.an.instanceOf(TelemetryDescription);
+        expect(obj.data).to.be.an.instanceOf(TelemetryNames);
     });
 
     it('Unknown format recognition', function () {
