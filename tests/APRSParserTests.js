@@ -3,10 +3,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var Message = require("../lib/MessageModels/Message.js");
-var Position = require("../lib/MessageModels/Position.js");
-var Telemetry = require("../lib/MessageModels/Telemetry.js");
-var TelemetryNames = require("../lib/MessageModels/TelemetryNames.js");
+var Models = require("../lib/MessageModels");
 
 var APRSMessage = require("../lib/APRSMessage.js");
 
@@ -32,7 +29,7 @@ describe('APRSParser', function () {
 
         expect(obj).to.exist;
         expect(obj.data).to.exist;
-        expect(obj.data).to.be.an.instanceOf(Position);
+        expect(obj.data).to.be.an.instanceOf(Models.Position);
     });
 
     it('Message recognition', function () {
@@ -40,7 +37,7 @@ describe('APRSParser', function () {
 
         expect(obj).to.exist;
         expect(obj.data).to.exist;
-        expect(obj.data).to.be.an.instanceOf(Message);
+        expect(obj.data).to.be.an.instanceOf(Models.Message);
     });
 
     it('Telemetry recognition', function () {
@@ -48,15 +45,39 @@ describe('APRSParser', function () {
 
         expect(obj).to.exist;
         expect(obj.data).to.exist;
-        expect(obj.data).to.be.an.instanceOf(Telemetry);
+        expect(obj.data).to.be.an.instanceOf(Models.Telemetry);
     });
 
-    it('Telemetry description recognition', function () {
+    it('Telemetry names recognition', function () {
         var obj = parser.parse("SQ7PFS>APRS::N0QBF-11 :PARM.Battery,Btemp,ATemp,Pres,Alt,Camra");
 
         expect(obj).to.exist;
         expect(obj.data).to.exist;
-        expect(obj.data).to.be.an.instanceOf(TelemetryNames);
+        expect(obj.data).to.be.an.instanceOf(Models.TelemetryNames);
+    });
+
+    it('Telemetry labels/units recognition', function () {
+        var obj = parser.parse("SQ7PFS>APRS::N0QBF-11 :UNIT.v/100,deg.F,deg.F,Mbar,Kft,Click,OPEN,on,on,hi");
+
+        expect(obj).to.exist;
+        expect(obj.data).to.exist;
+        expect(obj.data).to.be.an.instanceOf(Models.TelemetryLabels);
+    });
+
+    it('Telemetry coefficients recognition', function () {
+        var obj = parser.parse("SQ7PFS>APRS::N0QBF-11 :EQNS.0,5.2,0,0,.53,-32,3,4.39,49,-32,3,18,1,2,3");
+
+        expect(obj).to.exist;
+        expect(obj.data).to.exist;
+        expect(obj.data).to.be.an.instanceOf(Models.TelemetryEquations);
+    });
+
+    it('Telemetry bit sense recognition', function () {
+        var obj = parser.parse("SQ7PFS>APRS::N0QBF-11 :BITS.10110000,N0QBF’s Big Balloon");
+
+        expect(obj).to.exist;
+        expect(obj.data).to.exist;
+        expect(obj.data).to.be.an.instanceOf(Models.TelemetryBitSense);
     });
 
     it('Unknown format recognition', function () {
