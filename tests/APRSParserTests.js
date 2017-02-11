@@ -80,6 +80,15 @@ describe('APRSParser', function () {
         expect(obj.data).to.be.an.instanceOf(Models.TelemetryBitSense);
     });
 
+    it('MIC-E position', function () {
+        var obj = parser.parse("SQ7PFS>APDR13:`0U;l!#>/");
+
+        expect(obj).to.exist;
+        expect(obj.data).to.exist;
+        expect(obj.data).to.be.an.instanceOf(Models.MICEPosition);
+        expect(obj.data).to.be.an.instanceOf(Models.Position);
+    });
+
     it('Unknown format recognition', function () {
         var obj = parser.parse("SQ7PFS>APRS:Z");
 
