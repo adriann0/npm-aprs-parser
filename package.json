@@ -1,7 +1,7 @@
 {
-  "name": "npm-aprs-parser",
+  "name": "aprs-parser",
   "version": "1.0.0",
-  "description": "Module for parsing APRS messages",
+  "description": "JavaScript library for parsing APRS packets",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha tests --recursive"
