@@ -18,8 +18,8 @@ describe('Position parser', function () {
         expect(parsed).to.be.instanceOf(Models.Position);
         expect(parsed.msgEnabled).to.be.eql(false);
 
-        var latitude = 49 + (3 / 60) + (50 / 3600);
-        var longitude = -1 * (72 + (1 / 60) + (75 / 3600));
+        var latitude = 49 + (3.50 / 60);
+        var longitude = -1 * (72 + (1.75 / 60));
 
         expect(parsed.latitude).to.be.eql(latitude);
         expect(parsed.longitude).to.be.eql(longitude);

@@ -16,7 +16,7 @@ JavaScript library for parsing [APRS](http://www.aprs.org/) packets.
 
 Output:
 
-```javascript
+```
     APRSMessage {
       from: Callsign { ssid: '10', call: 'SQ7PFS' },
       to: Callsign { call: 'APRS' },
@@ -27,8 +27,8 @@ Output:
       raw: 'SQ7PFS-10>APRS,TCPIP*,qAC,T2SYDNEY:@085502/4903.50N/07201.75W-Hello world/A=001234',
       data: 
        Position {
-         latitude: 49.06388888888888,
-         longitude: -72.0375,
+         latitude: 49.05833333333333,
+         longitude: -72.02916666666667,
          timestamp: '085502/',
          symbol: '/-',
          msgEnabled: true,
@@ -49,6 +49,7 @@ $ npm install aprs-parser --save
 * Current MIC-E
 * Telemetry
 * Messages
+* Objects (without compression)
 
 ## License
 
