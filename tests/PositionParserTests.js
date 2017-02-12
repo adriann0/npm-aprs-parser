@@ -7,7 +7,7 @@ var Models = require("../lib/MessageModels");
 var PositionParser = require("../lib/Position/PositionParser.js");
 
 describe('Position parser', function () {
-    it('Minimal frame', function () {
+    it('Minimal frame (not compressed)', function () {
         var content = "!4903.50N/07201.75W-";
         var parser = new PositionParser();
 
@@ -35,6 +35,25 @@ describe('Position parser', function () {
         expect(parsed).to.be.instanceOf(Models.Position);
         expect(parsed.comment).to.be.eql("Hello");
         expect(parsed.altitude).to.be.eql(304.8);
+    });
+
+    it('Compressed latitude / longitude', function () {
+        var content = "!/5L!!<*e7>7P[";
+        var parser = new PositionParser();
+
+        expect(parser.isMatching(content.substr(0, 1))).to.equal(true);
+
+        var parsed = parser.tryParse(content);
+
+        expect(parsed).to.be.instanceOf(Models.Position);
+
+        var epsilon = 0.0001;
+        var expectedLatitude = 49.5;
+        var expectedLongitude = -72.75;
+
+        expect(parsed.latitude).to.be.within(expectedLatitude - epsilon, expectedLatitude + epsilon);
+        expect(parsed.longitude).to.be.within(expectedLongitude - epsilon, expectedLongitude + epsilon);
+        expect(parsed.symbol).to.be.eql("/>");
     });
 
 });
