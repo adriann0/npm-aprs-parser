@@ -45,11 +45,11 @@ $ npm install aprs-parser --save
 
 ## Supported data types
 
-* Position (without compression)
+* Position
+* Objects
 * Current MIC-E
 * Telemetry
 * Messages
-* Objects (without compression)
 
 ## License
 
