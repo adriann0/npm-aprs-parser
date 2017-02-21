@@ -15,7 +15,12 @@ describe('Object position parser', function () {
 
         expect(parsed).to.be.instanceOf(Models.ObjectPosition);
         expect(parsed.name).to.be.eql("LEADER");
-        expect(parsed.timestamp).to.be.eql("092345z");
+
+        var now = new Date();
+        now.setUTCDate(9);
+        now.setUTCHours(23, 45, 0, 0);
+        expect(parsed.timestamp).to.be.eql(now);
+
         expect(parsed.symbol).to.be.eql("/>");
         expect(parsed.latitude).to.be.eql(49 + 3.50 / 60);
         expect(parsed.longitude).to.be.eql(-1 * (72 + 1.75 / 60));
@@ -42,7 +47,12 @@ describe('Object position parser', function () {
 
         expect(parsed).to.be.instanceOf(Models.ObjectPosition);
         expect(parsed.name).to.be.eql("LEADER");
-        expect(parsed.timestamp).to.be.eql("092345z");
+
+        var now = new Date();
+        now.setUTCDate(9);
+        now.setUTCHours(23, 45, 0, 0);
+        expect(parsed.timestamp).to.be.eql(now);
+
         expect(parsed.symbol).to.be.eql("/>");
 
         var epsilon = 0.0001;
