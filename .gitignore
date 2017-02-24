@@ -39,5 +39,3 @@ jspm_packages
 #WebStroms
 .idea
 .vscode
-test.js
-.gitignore
