@@ -27,7 +27,7 @@ describe('MIC-E position parser', function () {
         var parsed = parser.tryParse("`(_f \"Oj/", header);
 
         expect(parsed).to.be.instanceOf(Models.MICEPosition);
-        expect(parsed.symbol).to.be.eql("j/");
+        expect(parsed.symbol).to.be.eql("/j");
     });
 
     it('Too short', function () {
@@ -37,6 +37,23 @@ describe('MIC-E position parser', function () {
         expect(function () {
             parser.tryParse("`(_f \"Oj", header)
         }).to.throw(Error);
+    });
+
+    it('MIC-E Altitude', function () {
+        var parser = new MICEParser();
+        var header = new App.APRSMessage(new Callsign("SQ7PFS"), new Callsign("S32U6T"), []);
+
+        var parsed = parser.tryParse("`(_f \"Oj/\"4T}", header);
+        expect(parsed.altitude).to.be.eql(61);
+    });
+
+    it('Radio model', function () {
+        var parser = new MICEParser();
+        var header = new App.APRSMessage(new Callsign("SQ7PFS"), new Callsign("S32U6T"), []);
+
+        var parsed = parser.tryParse("`(_f \"Oj/>abcdv", header);
+        expect(parsed.radio).to.be.eql("Kenwood TH-D7A Mobile");
+        expect(parsed.comment).to.be.eql("abcd");
     });
 
 });

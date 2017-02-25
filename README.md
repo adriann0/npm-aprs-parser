@@ -30,6 +30,8 @@ Output:
          latitude: 49.05833333333333,
          longitude: -72.02916666666667,
          symbol: '/-',
+         symbolIcon: 'House',
+         radio: 'Kenwood TH-D74 Handheld',
          altitude: 376.1232,
          comment: 'Hello world',
          timestamp: Tue Feb 21 2017 09:55:02 GMT+0100 (CET),
@@ -54,3 +56,9 @@ $ npm install aprs-parser --save
 ## License
 
 Library is licensed under the GNU Lesser General Public License. 
+
+
+
+Library by [adriann0](https://github.com/adriann0)
+
+Modified to include radio, Mic-E altitude, and symbol icons by [Kris Linquist](http://www.github.com/klinquist) 
