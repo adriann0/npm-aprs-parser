@@ -9,6 +9,9 @@ var MICEParserUtils = require("../lib/Position/MICEParserUtils.js");
 var Callsign = require("../lib/Callsign");
 var App = require("../lib");
 
+var CourseSpeed = require("../lib/PostionExtensions/ExtensionModels").CourseSpeed;
+var UncompressedPositionParserUtil = require("../lib/Position/UncompressedPositionParserUtil");
+
 describe('MIC-E position parser', function () {
     it('Parsing position longitude', function () {
         var parser = new MICEParser();
@@ -45,6 +48,18 @@ describe('MIC-E position parser', function () {
 
         var parsed = parser.tryParse("`(_f \"Oj/\"4T}", header);
         expect(parsed.altitude).to.be.eql(61);
+    });
+
+    it('MIC-E speed / course', function () {
+        var parser = new MICEParser();
+        var header = new App.APRSMessage(new Callsign("SQ7PFS"), new Callsign("S32U6T"), []);
+
+        var parsed = parser.tryParse("`(_fn\"Oj/", header);
+
+        var extension = parsed.extension;
+        expect(extension).to.be.an.instanceOf(CourseSpeed);
+        expect(extension.courseDeg).to.be.eql(251);
+        expect(extension.speedMPerS).to.be.eql(UncompressedPositionParserUtil.knotsToMetersPerSecond(20));
     });
 
     it('Radio model', function () {
