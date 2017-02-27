@@ -1,6 +1,7 @@
 'use strict';
 
 var PositionParserUtil = require("../lib/Position/PositionParserUtils.js");
+var UncompressedPositionParserUtil = require("../lib/Position/UncompressedPositionParserUtil.js");
 
 var chai = require('chai');
 var expect = chai.expect;
@@ -33,5 +34,14 @@ describe('PositionParserUtil', function () {
         expect(function () {
             PositionParserUtil.parseTimestamp("234517/");
         }).to.throw(Error);
+    });
+
+    it('Extension, altitude, comment split', function () {
+        var parsed = UncompressedPositionParserUtil.parseAltitudeAndExtension("088/036Hello/A=001000");
+
+        expect(parsed.comment).to.exist;
+        expect(parsed.extension).to.exist;
+        expect(parsed.altitude).to.exist;
+        expect(parsed.comment).to.eql("Hello");
     });
 });

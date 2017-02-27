@@ -9,7 +9,7 @@ JavaScript library for parsing [APRS](http://www.aprs.org/) packets.
     
     var parser = new aprs.APRSParser();
     
-    var result = parser.parse("SQ7PFS-10>APRS,TCPIP*,qAC,T2SYDNEY:@085502h4903.50N/07201.75W-Hello world/A=001234");
+    var result = parser.parse("SQ7PFS-10>APRS,TCPIP*,qAC,T2SYDNEY:@085502h4903.50N/07201.75W-PHG5132Hello world/A=001234");
     
     console.log(result);
 ```
@@ -24,17 +24,17 @@ Output:
        [ Callsign { call: 'TCPIP*' },
          Callsign { call: 'qAC' },
          Callsign { call: 'T2SYDNEY' } ],
-      raw: 'SQ7PFS-10>APRS,TCPIP*,qAC,T2SYDNEY:@085502h4903.50N/07201.75W-Hello world/A=001234',
+      raw: 'SQ7PFS-10>APRS,TCPIP*,qAC,T2SYDNEY:@085502h4903.50N/07201.75W-PHG5132Hello world/A=001234',
       data: 
        Position {
          latitude: 49.05833333333333,
          longitude: -72.02916666666667,
          symbol: '/-',
-         symbolIcon: 'House',
-         radio: 'Kenwood TH-D74 Handheld',
+         symbolIcon: 'Home',
+         extension: PHG { heightFeet: 20, gaindB: 3, directivityDeg: 90, powerWatts: 25 },
          altitude: 376.1232,
          comment: 'Hello world',
-         timestamp: Tue Feb 21 2017 09:55:02 GMT+0100 (CET),
+         timestamp: Mon Feb 27 2017 09:55:02 GMT+0100 (CET),
          msgEnabled: true } }
 
 ```
