@@ -14,6 +14,13 @@ var APRSParser = require("../lib/index.js");
 describe('APRSParser', function () {
     var parser = new APRSParser.APRSParser();
 
+    it('Invalid header', function () {
+        var obj = parser.parse("abc");
+        expect(obj).to.be.an.instanceOf(APRSMessage);
+        expect(obj.raw).to.exist;
+        expect(obj.errors).to.exist;
+    });
+
     it('Header parsing', function () {
         var obj = parser.parse("SQ7PFS-15>APRS,TCPIP:");
         expect(obj).to.be.an.instanceOf(APRSMessage);
