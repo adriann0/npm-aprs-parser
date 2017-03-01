@@ -105,6 +105,14 @@ describe('APRSParser', function () {
         expect(obj.data).to.be.an.instanceOf(Models.Position);
     });
 
+    it('Status report', function () {
+        var obj = parser.parse("SQ7PFS>APDR13:>Hello");
+
+        expect(obj).to.exist;
+        expect(obj.data).to.exist;
+        expect(obj.data).to.be.an.instanceOf(Models.StatusReport);
+    });
+
     it('Unknown format recognition', function () {
         var obj = parser.parse("SQ7PFS>APRS:Z");
 

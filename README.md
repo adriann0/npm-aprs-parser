@@ -71,6 +71,7 @@ $ npm install aprs-parser --save
 * Current MIC-E
 * Telemetry
 * Messages
+* Status reports
 
 ## License
 
