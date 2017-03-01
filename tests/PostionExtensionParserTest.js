@@ -31,6 +31,13 @@ describe('APRSParser', function () {
         expect(parsed.directivityDeg).to.eql(0); //0 = omni
     });
 
+    it('RNG', function () {
+        var parsed = parser.tryParse("RNG0050");
+
+        expect(parsed).to.be.an.instanceOf(Models.RNG);
+        expect(parsed.rangeMeters).to.eql(PositionParserUtils.milesToMeters(50));
+    });
+
     it('Course / Speed', function () {
         var parsed = parser.tryParse("088/036");
 
