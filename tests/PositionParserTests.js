@@ -37,6 +37,16 @@ describe('Position parser', function () {
         expect(parsed.altitude).to.be.eql(304.8);
     });
 
+    it('Comment with weather', function () {
+        var content = "!4237.15N/00625.38W_261/002g005t049r000p000P000h47b10224myWeather";
+        var parser = new PositionParser();
+        var parsed = parser.tryParse(content);
+        expect(parsed).to.be.instanceOf(Models.Position);
+        expect(parsed.comment).to.be.eql("myWeather");
+        expect(parsed.weather).to.not.be.null;
+        expect(parsed.weather.humidity).to.be.eql(47)
+    });
+
     it('Compressed latitude / longitude', function () {
         var content = "!/5L!!<*e7>7P[";
         var parser = new PositionParser();
