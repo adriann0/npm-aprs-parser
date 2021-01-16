@@ -23,6 +23,6 @@
   "homepage": "https://github.com/adriann0/npm-aprs-parser#readme",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^8.2.1"
   }
 }
