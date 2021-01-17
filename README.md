@@ -58,6 +58,22 @@ Output:
 
 ```
 
+## Code Example - APRS Stream
+
+This library also supports connecting to the APRS "firehose".  An amateur radio license is required to connect.
+
+
+```javascript
+    const aprs = require("aprs-parser");
+    const stream = new aprs.APRSISConnector;
+    stream.connect('YOUR-AMATEUR-RADIO-CALLSIGN');
+    
+    stream.on('aprs', (event)=>{
+        console.log(event)
+    });
+```
+
+
 ## Installation
 
 ```
@@ -78,7 +94,4 @@ $ npm install aprs-parser --save
 Library is licensed under the GNU Lesser General Public License. 
 
 
-
-Library by [adriann0](https://github.com/adriann0)
-
-Modified to include radio, Mic-E altitude, and symbol icons by [Kris Linquist](http://www.github.com/klinquist) 
+Library by [adriann0](https://github.com/adriann0) with [Kris Linquist](http://www.github.com/klinquist) as an additioinal contributor.
