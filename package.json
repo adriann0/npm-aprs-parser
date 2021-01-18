@@ -4,7 +4,8 @@
   "description": "JavaScript library for parsing APRS packets",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha tests --recursive"
+    "test": "mocha tests --recursive",
+    "lint": "./node_modules/.bin/eslint \"./**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/adriann0/npm-aprs-parser#readme",
   "devDependencies": {
     "chai": "^3.5.0",
+    "eslint": "^7.18.0",
     "mocha": "^8.2.1"
   }
 }
