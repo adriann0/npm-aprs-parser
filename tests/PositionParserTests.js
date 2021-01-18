@@ -1,59 +1,59 @@
 'use strict';
 
-var chai = require('chai');
-var expect = chai.expect;
+const chai = require('chai');
+const expect = chai.expect;
 
-var Models = require("../lib/MessageModels");
-var PositionParser = require("../lib/Position/PositionParser.js");
+const Models = require('../lib/MessageModels');
+const PositionParser = require('../lib/Position/PositionParser.js');
 
-describe('Position parser', function () {
-    it('Minimal frame (not compressed)', function () {
-        var content = "!4903.50N/07201.75W-";
-        var parser = new PositionParser();
+describe('Position parser', () => {
+    it('Minimal frame (not compressed)', () => {
+        const content = '!4903.50N/07201.75W-';
+        const parser = new PositionParser();
 
         expect(parser.isMatching(content.substr(0, 1))).to.equal(true);
 
-        var parsed = parser.tryParse(content);
+        const parsed = parser.tryParse(content);
 
         expect(parsed).to.be.instanceOf(Models.Position);
         expect(parsed.msgEnabled).to.be.eql(false);
 
-        var latitude = 49 + (3.50 / 60);
-        var longitude = -1 * (72 + (1.75 / 60));
+        const latitude = 49 + (3.50 / 60);
+        const longitude = -1 * (72 + (1.75 / 60));
 
         expect(parsed.latitude).to.be.eql(latitude);
         expect(parsed.longitude).to.be.eql(longitude);
-        expect(parsed.symbol).to.be.eql("/-");
+        expect(parsed.symbol).to.be.eql('/-');
     });
 
-    it('Comment with altitude', function () {
-        var content = "!4903.50N/07201.75W-Hello/A=001000";
-        var parser = new PositionParser();
+    it('Comment with altitude', () => {
+        const content = '!4903.50N/07201.75W-Hello/A=001000';
+        const parser = new PositionParser();
 
-        var parsed = parser.tryParse(content);
+        const parsed = parser.tryParse(content);
 
         expect(parsed).to.be.instanceOf(Models.Position);
-        expect(parsed.comment).to.be.eql("Hello");
+        expect(parsed.comment).to.be.eql('Hello');
         expect(parsed.altitude).to.be.eql(304.8);
     });
 
-    it('Compressed latitude / longitude', function () {
-        var content = "!/5L!!<*e7>7P[";
-        var parser = new PositionParser();
+    it('Compressed latitude / longitude', () => {
+        const content = '!/5L!!<*e7>7P[';
+        const parser = new PositionParser();
 
         expect(parser.isMatching(content.substr(0, 1))).to.equal(true);
 
-        var parsed = parser.tryParse(content);
+        const parsed = parser.tryParse(content);
 
         expect(parsed).to.be.instanceOf(Models.Position);
 
-        var epsilon = 0.0001;
-        var expectedLatitude = 49.5;
-        var expectedLongitude = -72.75;
+        const epsilon = 0.0001;
+        const expectedLatitude = 49.5;
+        const expectedLongitude = -72.75;
 
         expect(parsed.latitude).to.be.within(expectedLatitude - epsilon, expectedLatitude + epsilon);
         expect(parsed.longitude).to.be.within(expectedLongitude - epsilon, expectedLongitude + epsilon);
-        expect(parsed.symbol).to.be.eql("/>");
+        expect(parsed.symbol).to.be.eql('/>');
     });
 
 });

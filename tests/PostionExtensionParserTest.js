@@ -1,18 +1,18 @@
 'use strict';
 
-var chai = require('chai');
-var expect = chai.expect;
+const chai = require('chai');
+const expect = chai.expect;
 
-var Models = require("../lib/PostionExtensions/ExtensionModels");
-var ExtensionParser = require("../lib/PostionExtensions/ExtensionParser.js");
+const Models = require('../lib/PostionExtensions/ExtensionModels');
+const ExtensionParser = require('../lib/PostionExtensions/ExtensionParser.js');
 
-var PositionParserUtils = require("../lib/Position/UncompressedPositionParserUtil");
+const PositionParserUtils = require('../lib/Position/UncompressedPositionParserUtil');
 
-describe('APRSParser', function () {
-    var parser = new ExtensionParser();
+describe('APRSParser', () => {
+    const parser = new ExtensionParser();
 
-    it('PHG', function () {
-        var parsed = parser.tryParse("PHG5132");
+    it('PHG', () => {
+        const parsed = parser.tryParse('PHG5132');
 
         expect(parsed).to.be.an.instanceOf(Models.PHG);
         expect(parsed.powerWatts).to.eql(25);
@@ -21,8 +21,8 @@ describe('APRSParser', function () {
         expect(parsed.directivityDeg).to.eql(90); //0 = omni
     });
 
-    it('DFS', function () {
-        var parsed = parser.tryParse("DFS2360");
+    it('DFS', () => {
+        const parsed = parser.tryParse('DFS2360');
 
         expect(parsed).to.be.an.instanceOf(Models.DFS);
         expect(parsed.strengthS).to.eql(2);
@@ -31,15 +31,15 @@ describe('APRSParser', function () {
         expect(parsed.directivityDeg).to.eql(0); //0 = omni
     });
 
-    it('RNG', function () {
-        var parsed = parser.tryParse("RNG0050");
+    it('RNG', () => {
+        const parsed = parser.tryParse('RNG0050');
 
         expect(parsed).to.be.an.instanceOf(Models.RNG);
         expect(parsed.rangeMeters).to.eql(PositionParserUtils.milesToMeters(50));
     });
 
-    it('Course / Speed', function () {
-        var parsed = parser.tryParse("088/036");
+    it('Course / Speed', () => {
+        const parsed = parser.tryParse('088/036');
 
         expect(parsed).to.be.an.instanceOf(Models.CourseSpeed);
         expect(parsed.courseDeg).to.eql(88);
