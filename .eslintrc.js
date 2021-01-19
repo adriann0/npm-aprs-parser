@@ -31,7 +31,6 @@ module.exports = {
         'no-undef': ['error'],
         'no-console':0,
         'prefer-const': 'warn',
-        //'object-shorthand': ['warn', 'always'],
         'quotes': ['error', 'single'],
         'prefer-arrow-callback': ['warn', { 'allowNamedFunctions': true }],
         'no-trailing-spaces':['error'],
