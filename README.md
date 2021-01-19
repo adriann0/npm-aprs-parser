@@ -5,9 +5,9 @@ JavaScript library for parsing [APRS](http://www.aprs.org/) packets.
 ## Code Example
 
 ```javascript
-    var aprs = require("aprs-parser");
+    const aprs = require("aprs-parser");
     
-    var parser = new aprs.APRSParser();
+    const parser = new aprs.APRSParser();
 
     console.log(parser.parse("SQ7PFS-10>APRS,TCPIP*,qAC,T2SYDNEY:@085502h4903.50N/07201.75W-PHG5132Hello world/A=001234"));
     console.log();
