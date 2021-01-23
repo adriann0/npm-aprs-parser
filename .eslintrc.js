@@ -26,6 +26,7 @@ module.exports = {
             'error',
             'always'
         ],
+        'no-constant-condition':0,
         'no-unused-vars':0,
         'no-empty':0,
         'no-undef': ['error'],

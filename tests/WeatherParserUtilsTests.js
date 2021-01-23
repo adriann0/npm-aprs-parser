@@ -53,13 +53,13 @@ describe('WeatherParserUtils', () => {
         expect(parsed.comment).to.eql('Comment');
     });
 
-    it("Only temperature (irrelevant values replaced by spaces)", () => {
+    it('Only temperature (irrelevant values replaced by spaces)', () => {
         const parsed = WeatherParserUtils.parseWeatherData('c   s   g   t-99Comment');
         expect(parsed.weather.temperature).to.eql((-99-32)/1.8);
         expect(parsed.comment).to.eql('Comment');
     });
 
-    it("Invalid value stops parsing", () => {
+    it('Invalid value stops parsing', () => {
         const parsed = WeatherParserUtils.parseWeatherData('c...s...g...t-99hXXb12345');
         expect(parsed.weather.temperature).to.eql((-99-32)/1.8);
         expect(parsed.comment).to.eql('hXXb12345');
