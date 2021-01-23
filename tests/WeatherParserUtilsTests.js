@@ -6,7 +6,7 @@ const chai = require('chai');
 const expect = chai.expect;
 
 describe('WeatherParserUtils', () => {
-    it('Text regex & extract comment from weather', () => {
+    it('Extract weather and comment', () => {
         const parsed = WeatherParserUtils.parseWeatherData('g002t017r000p000P000h80b10232L016_COMMENT_AFTER');
         expect(parsed.weather).to.exist;
         expect(parsed.comment).to.exist;
@@ -48,19 +48,19 @@ describe('WeatherParserUtils', () => {
     });
 
     it('Negative temperature', () => {
-        const parsed = WeatherParserUtils.parseWeatherData('c...s...g...t-99Comment');
+        const parsed = WeatherParserUtils.parseWeatherData('s...g...t-99Comment');
         expect(parsed.weather.temperature).to.eql((-99-32)/1.8);
         expect(parsed.comment).to.eql('Comment');
     });
 
     it('Only temperature (irrelevant values replaced by spaces)', () => {
-        const parsed = WeatherParserUtils.parseWeatherData('c   s   g   t-99Comment');
+        const parsed = WeatherParserUtils.parseWeatherData('s   g   t-99Comment');
         expect(parsed.weather.temperature).to.eql((-99-32)/1.8);
         expect(parsed.comment).to.eql('Comment');
     });
 
     it('Invalid value stops parsing', () => {
-        const parsed = WeatherParserUtils.parseWeatherData('c...s...g...t-99hXXb12345');
+        const parsed = WeatherParserUtils.parseWeatherData('s...g...t-99hXXb12345');
         expect(parsed.weather.temperature).to.eql((-99-32)/1.8);
         expect(parsed.comment).to.eql('hXXb12345');
     });

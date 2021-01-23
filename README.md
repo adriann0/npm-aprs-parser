@@ -100,7 +100,7 @@ APRSMessage {
   }
 ```
 
-For WX stations with position CourseSpeed extension is used to represent wind sped and direction. Units used in weather report:
+For WX stations with position CourseSpeed extension is used to represent wind speed and direction. Units used in weather report:
 - rain1h, rain24h, rainSinceMidnight - millimeters
 - windGust - meters per second
 - temperature - Celcius
