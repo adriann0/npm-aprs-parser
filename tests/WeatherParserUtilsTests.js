@@ -16,12 +16,12 @@ describe('WeatherParserUtils', () => {
         expect(parsed.weather.humidity).to.eql(80);
         expect(parsed.weather.luminosity).to.exist;
         expect(parsed.weather.luminosity).to.eql(16);
-        expect(parsed.weather.rain_1h).to.exist;
-        expect(parsed.weather.rain_1h).to.eql(0);
-        expect(parsed.weather.rain_24h).to.exist;
-        expect(parsed.weather.rain_24h).to.eql(0);
-        expect(parsed.weather.rain_since_midnight).to.exist;
-        expect(parsed.weather.rain_since_midnight).to.eql(0);
+        expect(parsed.weather.rain1h).to.exist;
+        expect(parsed.weather.rain1h).to.eql(0);
+        expect(parsed.weather.rain24h).to.exist;
+        expect(parsed.weather.rain24h).to.eql(0);
+        expect(parsed.weather.rainSinceMidnight).to.exist;
+        expect(parsed.weather.rainSinceMidnight).to.eql(0);
         expect(parsed.weather.temperature).to.exist;
         expect(parsed.weather.temperature).to.eql((17-32)/1.8);
         expect(parsed.comment).to.eql('_COMMENT_AFTER');
@@ -36,14 +36,32 @@ describe('WeatherParserUtils', () => {
         expect(parsed.weather.pressure).to.eql(993.3);
         expect(parsed.weather.humidity).to.exist;
         expect(parsed.weather.humidity).to.eql(90);
-        expect(parsed.weather.rain_1h).to.exist;
-        expect(parsed.weather.rain_1h).to.eql(3.048);
-        expect(parsed.weather.rain_24h).to.exist;
-        expect(parsed.weather.rain_24h).to.eql(10.414);
-        expect(parsed.weather.rain_since_midnight).to.exist;
-        expect(parsed.weather.rain_since_midnight).to.eql(10.414);
+        expect(parsed.weather.rain1h).to.exist;
+        expect(parsed.weather.rain1h).to.eql(3.048);
+        expect(parsed.weather.rain24h).to.exist;
+        expect(parsed.weather.rain24h).to.eql(10.414);
+        expect(parsed.weather.rainSinceMidnight).to.exist;
+        expect(parsed.weather.rainSinceMidnight).to.eql(10.414);
         expect(parsed.weather.temperature).to.exist;
         expect(parsed.weather.temperature).to.eql((36-32)/1.8);
         expect(parsed.comment).to.eql('eCumulusWS2300');
+    });
+
+    it('Negative temperature', () => {
+        const parsed = WeatherParserUtils.parseWeatherData('c...s...g...t-99Comment');
+        expect(parsed.weather.temperature).to.eql((-99-32)/1.8);
+        expect(parsed.comment).to.eql('Comment');
+    });
+
+    it("Only temperature (irrelevant values replaced by spaces)", () => {
+        const parsed = WeatherParserUtils.parseWeatherData('c   s   g   t-99Comment');
+        expect(parsed.weather.temperature).to.eql((-99-32)/1.8);
+        expect(parsed.comment).to.eql('Comment');
+    });
+
+    it("Invalid value stops parsing", () => {
+        const parsed = WeatherParserUtils.parseWeatherData('c...s...g...t-99hXXb12345');
+        expect(parsed.weather.temperature).to.eql((-99-32)/1.8);
+        expect(parsed.comment).to.eql('hXXb12345');
     });
 });
