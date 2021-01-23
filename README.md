@@ -58,6 +58,57 @@ Output:
 
 ```
 
+## Code Example - weather station support
+```javascript
+    const aprs = require("aprs-parser");
+    
+    const parser = new aprs.APRSParser();
+
+    console.log(parser.parse("FW7233>APRS,TCPXX*,qAX,CWOP-2:@231821z5150.13N/01913.68E_239/003g010t042r000p011P011b09969h83L000eMB51"));
+```
+
+Output:
+```
+APRSMessage {
+  from: Callsign { call: 'FW7233' },
+  to: Callsign { call: 'APRS' },
+  via: [
+    Callsign { call: 'TCPXX*' },
+    Callsign { call: 'qAX' },
+    Callsign { ssid: '2', call: 'CWOP' }
+  ],
+  raw: 'FW7233>APRS,TCPXX*,qAX,CWOP-2:@231821z5150.13N/01913.68E_239/003g010t042r000p011P011b09969h83L000eMB51',
+  data: Position {
+    latitude: 51.8355,
+    longitude: 19.228,
+    symbol: '/_',
+    symbolIcon: 'WX Station',
+    extension: CourseSpeed { courseDeg: 239, speedMPerS: 1.543333332 },
+    weather: {
+      windGust: 4.4704,
+      temperature: 5.555555555555555,
+      rain1h: 0,
+      rain24h: 2.794,
+      rainSinceMidnight: 2.794,
+      pressure: 996.9,
+      humidity: 83,
+      luminosity: 0
+    },
+    comment: 'eMB51',
+    timestamp: 2021-01-23T18:21:00.000Z,
+    msgEnabled: true
+  }
+```
+
+For WX stations with position CourseSpeed extension is used to represent wind sped and direction. Units used in weather report:
+- rain1h, rain24h, rainSinceMidnight - millimeters
+- windGust - meters per second
+- temperature - Celcius
+- pressure - millibars
+- luminosity - watts per square meter
+- snow - centimeters
+- humidity - %
+
 ## Code Example - APRS Stream
 
 This library also supports connecting to the APRS "firehose".  An amateur radio license is required to connect.
