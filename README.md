@@ -145,4 +145,4 @@ $ npm install aprs-parser --save
 Library is licensed under the GNU Lesser General Public License. 
 
 
-Library by [adriann0](https://github.com/adriann0) with [Kris Linquist](http://www.github.com/klinquist) as an additioinal contributor.
+Library by [adriann0](https://github.com/adriann0) with [Kris Linquist](http://www.github.com/klinquist) as an additional contributor.
