@@ -58,8 +58,8 @@ describe('Position parser', () => {
         expect(parsed.extension.courseDeg).to.be.eql(239);
         expect(parsed.extension.speedMPerS).to.be.within(expectedSpeed - epsilon, expectedSpeed + epsilon);
         expect(parsed.weather.pressure).to.be.eql(996.9);
-        expect(parsed.comment).to.be.eql("eMB51");
-    })
+        expect(parsed.comment).to.be.eql('eMB51');
+    });
 
     it('Compressed latitude / longitude', () => {
         const content = '!/5L!!<*e7>7P[';
