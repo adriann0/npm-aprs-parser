@@ -47,6 +47,19 @@ describe('Position parser', () => {
         expect(parsed.weather.humidity).to.be.eql(47);
     });
 
+    it('Comment with course/speed extension and weather', () => {
+        const content = '@231821z5150.13N/01913.68E_239/003g010t042r000p011P011b09969h83L000eMB51';
+        const parser = new PositionParser();
+        const parsed = parser.tryParse(content);
+
+        const epsilon = 0.0001;
+        const expectedSpeed = 1.543333332;
+
+        expect(parsed.extension.courseDeg).to.be.eql(239);
+        expect(parsed.extension.speedMPerS).to.be.within(expectedSpeed - epsilon, expectedSpeed + epsilon);
+        expect(parsed.weather.pressure).to.be.eql(996.9);
+    })
+
     it('Compressed latitude / longitude', () => {
         const content = '!/5L!!<*e7>7P[';
         const parser = new PositionParser();
