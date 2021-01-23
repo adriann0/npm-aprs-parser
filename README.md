@@ -139,6 +139,7 @@ $ npm install aprs-parser --save
 * Telemetry
 * Messages
 * Status reports
+* Weather
 
 ## License
 
