@@ -37,8 +37,7 @@ describe('PositionParserUtil', () => {
     });
 
     it('Extension, altitude, comment split', () => {
-        const parsed = UncompressedPositionParserUtil.parseAltitudeAndExtension('088/036Hello/A=001000');
-
+        const parsed = UncompressedPositionParserUtil.parseAltitudeWeatherAndExtension('088/036Hello/A=001000');
         expect(parsed.comment).to.exist;
         expect(parsed.extension).to.exist;
         expect(parsed.altitude).to.exist;
