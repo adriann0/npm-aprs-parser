@@ -5,9 +5,9 @@ JavaScript library for parsing [APRS](http://www.aprs.org/) packets.
 ## Code Example
 
 ```javascript
-    var aprs = require("aprs-parser");
+    const aprs = require("aprs-parser");
     
-    var parser = new aprs.APRSParser();
+    const parser = new aprs.APRSParser();
 
     console.log(parser.parse("SQ7PFS-10>APRS,TCPIP*,qAC,T2SYDNEY:@085502h4903.50N/07201.75W-PHG5132Hello world/A=001234"));
     console.log();
@@ -58,6 +58,73 @@ Output:
 
 ```
 
+## Code Example - weather station support
+```javascript
+    const aprs = require("aprs-parser");
+    
+    const parser = new aprs.APRSParser();
+
+    console.log(parser.parse("FW7233>APRS,TCPXX*,qAX,CWOP-2:@231821z5150.13N/01913.68E_239/003g010t042r000p011P011b09969h83L000eMB51"));
+```
+
+Output:
+```
+APRSMessage {
+  from: Callsign { call: 'FW7233' },
+  to: Callsign { call: 'APRS' },
+  via: [
+    Callsign { call: 'TCPXX*' },
+    Callsign { call: 'qAX' },
+    Callsign { ssid: '2', call: 'CWOP' }
+  ],
+  raw: 'FW7233>APRS,TCPXX*,qAX,CWOP-2:@231821z5150.13N/01913.68E_239/003g010t042r000p011P011b09969h83L000eMB51',
+  data: Position {
+    latitude: 51.8355,
+    longitude: 19.228,
+    symbol: '/_',
+    symbolIcon: 'WX Station',
+    extension: CourseSpeed { courseDeg: 239, speedMPerS: 1.543333332 },
+    weather: {
+      windGust: 4.4704,
+      temperature: 5.555555555555555,
+      rain1h: 0,
+      rain24h: 2.794,
+      rainSinceMidnight: 2.794,
+      pressure: 996.9,
+      humidity: 83,
+      luminosity: 0
+    },
+    comment: 'eMB51',
+    timestamp: 2021-01-23T18:21:00.000Z,
+    msgEnabled: true
+  }
+```
+
+For WX stations with position CourseSpeed extension is used to represent wind speed and direction. Units used in weather report:
+- rain1h, rain24h, rainSinceMidnight - millimeters
+- windGust - meters per second
+- temperature - Celcius
+- pressure - millibars
+- luminosity - watts per square meter
+- snow - centimeters
+- humidity - %
+
+## Code Example - APRS Stream
+
+This library also supports connecting to the APRS "firehose".  An amateur radio license is required to connect.
+
+
+```javascript
+    const aprs = require("aprs-parser");
+    const stream = new aprs.APRSISConnector;
+    stream.connect('YOUR-AMATEUR-RADIO-CALLSIGN');
+    
+    stream.on('aprs', (event)=>{
+        console.log(event)
+    });
+```
+
+
 ## Installation
 
 ```
@@ -72,13 +139,11 @@ $ npm install aprs-parser --save
 * Telemetry
 * Messages
 * Status reports
+* Weather
 
 ## License
 
 Library is licensed under the GNU Lesser General Public License. 
 
 
-
-Library by [adriann0](https://github.com/adriann0)
-
-Modified to include radio, Mic-E altitude, and symbol icons by [Kris Linquist](http://www.github.com/klinquist) 
+Library by [adriann0](https://github.com/adriann0) with [Kris Linquist](http://www.github.com/klinquist) as an additional contributor.
