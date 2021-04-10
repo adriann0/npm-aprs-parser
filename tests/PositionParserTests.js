@@ -94,7 +94,7 @@ describe('Position parser', () => {
         expect(parsed.telemetry.analog).to.be.eql([12, 1513, 396, 1]);
     });
 
-        it('Compressed position with Base91 telemetry', () => {
+    it('Compressed position with Base91 telemetry', () => {
         const content = '!/5L!!<*e7>7P[|#b!-1Z%A!"|';
         const parser = new PositionParser();
 
