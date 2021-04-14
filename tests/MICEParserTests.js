@@ -71,6 +71,15 @@ describe('MIC-E position parser', () => {
         expect(parsed.comment).to.be.eql('abcd');
     });
 
+    it('MIC-E Base91 telemetry', () => {
+        const parser = new MICEParser();
+        const header = new App.APRSMessage(new Callsign('SQ7PFS'), new Callsign('S32U6T'), []);
+
+        const parsed = parser.tryParse('`(_f "Oj/>|\'s%0\'c|', header);
+        expect(parsed.telemetry.id).to.be.eql(628);
+        expect(parsed.telemetry.analog).to.be.eql([379, 612]);
+    });
+
 });
 
 describe('MIC-E position parser utils', () => {

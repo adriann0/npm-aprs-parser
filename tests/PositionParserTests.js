@@ -80,4 +80,30 @@ describe('Position parser', () => {
         expect(parsed.symbol).to.be.eql('/>');
     });
 
+    it('Uncompressed position with Base91 telemetry', () => {
+        const content = '!4903.50N/07201.75W-Hello/A=001000|#b!-1Z%A!"|';
+        const parser = new PositionParser();
+
+        const parsed = parser.tryParse(content);
+
+        expect(parsed).to.be.instanceOf(Models.Position);
+        expect(parsed.comment).to.be.eql('Hello');
+        expect(parsed.altitude).to.be.eql(304.8);
+        expect(parsed.telemetry).to.be.instanceOf(Models.Telemetry);
+        expect(parsed.telemetry.id).to.be.eql(247);
+        expect(parsed.telemetry.analog).to.be.eql([12, 1513, 396, 1]);
+    });
+
+    it('Compressed position with Base91 telemetry', () => {
+        const content = '!/5L!!<*e7>7P[|#b!-1Z%A!"|';
+        const parser = new PositionParser();
+
+        const parsed = parser.tryParse(content);
+
+        expect(parsed).to.be.instanceOf(Models.Position);
+        expect(parsed.telemetry).to.be.instanceOf(Models.Telemetry);
+        expect(parsed.telemetry.id).to.be.eql(247);
+        expect(parsed.telemetry.analog).to.be.eql([12, 1513, 396, 1]);
+    });
+
 });
