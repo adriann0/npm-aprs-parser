@@ -67,7 +67,7 @@ describe('Base91ParserUtils', () => {
         expect(parsed.telemetry.analog).to.exist;
         expect(parsed.telemetry.analog).to.eql([1472, 1564, 1656, 1748, 1840]);
         expect(parsed.telemetry.digital).to.exist;
-        expect(parsed.telemetry.digital).to.eql([1, 0, 0, 0, 0, 0, 0, 0]);
+        expect(parsed.telemetry.digital).to.eql([true, false, false, false, false, false, false, false]);
         expect(parsed.comment).to.eql('');
     });
 
@@ -80,7 +80,7 @@ describe('Base91ParserUtils', () => {
         expect(parsed.telemetry.analog).to.exist;
         expect(parsed.telemetry.analog).to.eql([1472, 1564, 1656, 1748, 1840]);
         expect(parsed.telemetry.digital).to.exist;
-        expect(parsed.telemetry.digital).to.eql([0, 1, 0, 1, 1, 0, 1, 0]);
+        expect(parsed.telemetry.digital).to.eql([false, true, false, true, true, false, true, false]);
         expect(parsed.comment).to.eql('comment');
     });
 
@@ -93,7 +93,7 @@ describe('Base91ParserUtils', () => {
         expect(parsed.telemetry.analog).to.exist;
         expect(parsed.telemetry.analog).to.eql([1472, 1564, 1656, 1748, 8188]);
         expect(parsed.telemetry.digital).to.exist;
-        expect(parsed.telemetry.digital).to.eql([0, 0, 1, 1, 1, 1, 1, 1]);
+        expect(parsed.telemetry.digital).to.eql([false, false, true, true, true, true, true, true]);
         expect(parsed.comment).to.eql('commentmorecomment');
     });
 
