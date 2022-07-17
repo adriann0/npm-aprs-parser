@@ -37,6 +37,17 @@ describe('Position parser', () => {
         expect(parsed.altitude).to.be.eql(304.8);
     });
 
+    it('Comment with negative altitude', () => {
+        const content = '!4903.50N/07201.75W-Hello/A=-01000';
+        const parser = new PositionParser();
+
+        const parsed = parser.tryParse(content);
+
+        expect(parsed).to.be.instanceOf(Models.Position);
+        expect(parsed.comment).to.be.eql('Hello');
+        expect(parsed.altitude).to.be.eql(-304.8);
+    });
+
     it('Comment with weather', () => {
         const content = '!4237.15N/00625.38W_261/002g005t049r000p000P000h47b10224myWeather';
         const parser = new PositionParser();
